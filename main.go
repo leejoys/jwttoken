@@ -73,19 +73,17 @@ func verifyToken(tokenString string) (*jwt.MapClaims, error) {
 		return []byte(secretKey), nil
 	})
 	if err != nil {
-		if err != nil {
-			// Выводим причину невалидности токена или тип ошибки
-			if errors.Is(err, jwt.ErrTokenMalformed) {
-				log.Println("token is malformed")
-			} else if errors.Is(err, jwt.ErrTokenExpired) {
-				log.Println("token is expired")
-			} else if errors.Is(err, jwt.ErrTokenNotValidYet) {
-				log.Println("token is not valid yet")
-			} else {
-				log.Println("token is not valid")
-			}
-			return nil, err
+		// Выводим причину невалидности токена или тип ошибки
+		if errors.Is(err, jwt.ErrTokenMalformed) {
+			log.Println("token is malformed")
+		} else if errors.Is(err, jwt.ErrTokenExpired) {
+			log.Println("token is expired")
+		} else if errors.Is(err, jwt.ErrTokenNotValidYet) {
+			log.Println("token is not valid yet")
+		} else {
+			log.Println("token is not valid")
 		}
+		return nil, err
 	}
 
 	// Извлекаем claims из токена
