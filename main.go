@@ -70,7 +70,7 @@ func verifyToken(tokenString string) (*jwt.MapClaims, error) {
 
 	// Разбираем и проверяем токен с помощью секретного ключа
 	token, err := jwt.ParseWithClaims(tokenString, &jwt.MapClaims{}, func(token *jwt.Token) (interface{}, error) {
-		return secretKey, nil
+		return []byte(secretKey), nil
 	})
 	if err != nil {
 		if err != nil {
